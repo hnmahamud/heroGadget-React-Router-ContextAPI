@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { CartContext, ProductContext } from "../layout/Root";
 import Product from "../Product/Product";
 import { addToDb } from "../../utilities/fakedb";
+import { toast } from "react-hot-toast";
 
 const Shop = () => {
   const products = useContext(ProductContext);
@@ -22,6 +23,7 @@ const Shop = () => {
     }
     setCart(finalCart);
     addToDb(product.id);
+    toast("Product Added!");
   };
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-12">

@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import heroImg from "../../assets/hero.jpg";
+import { CartContext } from "../layout/Root";
+import Modal from "../Modal/Modal";
 
 const Home = () => {
+  const [cart, setCart] = useContext(CartContext);
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const cartAlert = sessionStorage.getItem("alert");
+  if (cart.length > 0 && cartAlert !== "true") {
+    setIsOpen(true);
+    sessionStorage.setItem("alert", true);
+  }
+
   return (
     <section>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen}></Modal>
+
       <div className="flex flex-col text-gray-900 text-center space-y-8 pt-12">
         <div className="text-2xl md:text-5xl">
           <h1 className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent font-black">
